@@ -1,0 +1,10 @@
+:root {
+  --type-electric: yellow;
+  --type-grow: green;
+}
+
+body {
+  margin: auto;
+  padding: 0;
+  font-family: "Andika New Basic", sans-serif;
+}

@@ -4,9 +4,12 @@ import App from "./containers/App";
 import { reducer } from "./store";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
+import { logger } from "redux-logger";
 
+import "./styles/index.css";
 const mainStore = configureStore({
   reducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
 ReactDOM.render(
