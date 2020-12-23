@@ -16,7 +16,7 @@ const PokeData = ({ abilities, avatar, height, id, name, type }) => {
                             <div className='type' style={{ background: `var(--type-${item})`, width: '90px' }} key={item}>{item}</div>
                         )
                     })}</div>
-                    <div><span className='poke-data__title'>Height</span>  <span>{height}'</span></div>
+                    <div className='poke-data__height'><span className='poke-data__title'>Height</span>  <span>{height}'</span></div>
                     <div className='poke-data__abilities'>
                         <span className='poke-data__title'>Abilities</span>
                         <div className='poke-data__abilities--text'>

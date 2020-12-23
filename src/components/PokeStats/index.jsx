@@ -1,13 +1,15 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import './PokeStats.css'
 
 const PokeStats = ({ stats }) => {
-
-    const PokeStatsItem = ({ statName, value }) => {
+    const PokeStatsItem = ({ statName, value, statPower }) => {
         return (
-            <div>
-                <span>{statName}</span>
+            <div className='poke-stat__item'>
+                <span className='poke-stat__name'>{statName}</span>
                 <span>{value}</span>
+                <div className='poke-stat__visual--wrapper'>
+                    <div className="poke-stat__visual" style={{ width: `${value}%`, backgroundColor: `var(--stat-${statPower})` }}></div>
+                </div>
             </div>
         )
     }
@@ -15,9 +17,9 @@ const PokeStats = ({ stats }) => {
     return (
         <div>
             <h2>Base stats</h2>
-            <div>
+            <div className='poke-stats__wrapper'>
                 {
-                    stats.map((item) => {
+                    stats.map((item, i) => {
                         return (
                             <PokeStatsItem {...item} key={item.statName} />
                         )

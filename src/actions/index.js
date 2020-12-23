@@ -5,6 +5,21 @@ const fetchData = async (url) => {
   return res.json();
 };
 
+const defineStatPower = (statValue) => {
+  if (statValue <= 30) {
+    return "weak";
+  }
+  if (30 < statValue && statValue <= 60) {
+    return "mid";
+  }
+  if (60 < statValue && statValue <= 100) {
+    return "strong";
+  }
+  if (statValue > 100) {
+    return "mega";
+  }
+};
+
 const normalizeInfo = (info) => {
   return {
     id: info.id,
@@ -16,6 +31,7 @@ const normalizeInfo = (info) => {
     stats: info.stats.map((item) => ({
       value: item.base_stat,
       statName: item.stat.name,
+      statPower: defineStatPower(item.base_stat),
     })),
   };
 };

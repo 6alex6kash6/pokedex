@@ -8,6 +8,10 @@
   --type-normal: #6c757d;
   --type-bug: #e83e8c;
   --bg-default: rgba(14, 14, 8, 0.2);
+  --stat-weak: var(--type-fire);
+  --stat-mid: var(--type-electric);
+  --stat-strong: var(--type-grass);
+  --stat-mega: var(--type-poison);
 }
 
 body {
