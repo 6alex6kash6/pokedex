@@ -1,8 +1,13 @@
 :root {
-  --type-electric: yellow;
-  --type-grass: green;
-  --type-poison: purple;
-  --type-fire: orange;
+  --type-electric: #ffc107;
+  --type-grass: #28a745;
+  --type-poison: #6f42c1;
+  --type-fire: #dc3545;
+  --type-water: #007bff;
+  --type-flying: #17a2b8;
+  --type-normal: #6c757d;
+  --type-bug: #e83e8c;
+  --bg-default: rgba(14, 14, 8, 0.2);
 }
 
 body {
