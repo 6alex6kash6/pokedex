@@ -1,3 +1,5 @@
-.list {
-  flex-basis: 50%;
+.poke-list {
+  flex-basis: 30%;
+  height: 850px;
+  overflow-y: scroll;
 }

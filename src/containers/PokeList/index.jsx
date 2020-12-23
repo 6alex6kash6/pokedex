@@ -11,7 +11,7 @@ const PokeList = ({ list, requestPokemons, requestPokemonInfo }) => {
     }, [requestPokemons])
 
     return (
-        <div>
+        <div className='poke-list'>
             <ul className='list-group'>
                 {
                     list.map(item => {
