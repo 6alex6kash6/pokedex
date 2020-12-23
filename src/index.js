@@ -1,14 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./containers/App";
-import { reducer } from "./store";
+import App from "./containers/App/App";
+import { rootReducer } from "./store";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { logger } from "redux-logger";
 
 import "./styles/index.css";
 const mainStore = configureStore({
-  reducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 

@@ -1,6 +1,8 @@
 :root {
   --type-electric: yellow;
-  --type-grow: green;
+  --type-grass: green;
+  --type-poison: purple;
+  --type-fire: orange;
 }
 
 body {

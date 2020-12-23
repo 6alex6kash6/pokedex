@@ -1,10 +1,10 @@
 import React from 'react'
 
-const ListItem = ({ item }) => {
+const ListItem = ({ item, onShowInfo }) => {
     return (
-        <li>
-            {item}
-            <button>show info</button>
+        <li className='list-group-item'>
+            {item.name}
+            <button onClick={() => onShowInfo(item.url)} className="btn btn-info">show info</button>
         </li>
     )
 }
