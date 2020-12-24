@@ -28,7 +28,7 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
             }
             <ul className='list-group'>
                 {
-                    filteredList.map(item => {
+                    (filteredList || list).map(item => {
                         return <ListItem item={item} key={item.name} onShowInfo={requestPokemonInfo} />
                     })
                 }

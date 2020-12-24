@@ -7,6 +7,7 @@ import {
 import { combineReducers } from "redux";
 
 const pokeList = (state = { list: [], loading: false }, action) => {
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case POKE_REQUEST:
       return {
@@ -19,7 +20,6 @@ const pokeList = (state = { list: [], loading: false }, action) => {
         loading: action.loading,
       };
     case FIND_POKE_NAME:
-      let newState = Object.assign({}, state);
       const { text } = action;
       if (text) {
         newState.filteredList = [
