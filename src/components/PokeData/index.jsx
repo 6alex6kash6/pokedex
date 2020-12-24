@@ -1,7 +1,6 @@
 import React from 'react';
 import './PokeData.css'
-
-const PokeData = ({ abilities, avatar, height, id, name, type }) => {
+const PokeData = ({ abilities, avatar, height, id, name, type, loading }) => {
     return (
         <div className='poke-data'>
             <h2>{name}</h2>

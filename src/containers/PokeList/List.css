@@ -2,4 +2,16 @@
   flex-basis: 30%;
   height: 850px;
   overflow-y: scroll;
+  position: relative;
+}
+
+.load-wrapper {
+  position: absolute;
+  height: 100%;
+  width: 29%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  background: rgba(114, 114, 110, 0.2);
 }

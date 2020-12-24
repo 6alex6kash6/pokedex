@@ -1,15 +1,24 @@
-import { POKE_REQUEST, POKE_INFO_REQUEST } from "../constants";
+import {
+  POKE_REQUEST,
+  POKE_INFO_REQUEST,
+  POKE_REQUEST_LOADING,
+} from "../constants";
 import { combineReducers } from "redux";
 
-const pokeList = (state = { list: [] }, action) => {
+const pokeList = (state = { list: [], loading: false }, action) => {
   switch (action.type) {
     case POKE_REQUEST:
       return {
         ...state,
-        list: action.list,
+        list: [...state.list.concat(action.list)],
+      };
+    case POKE_REQUEST_LOADING:
+      return {
+        ...state,
+        loading: action.loading,
       };
     default:
-      return state;
+      return { ...state };
   }
 };
 

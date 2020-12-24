@@ -4,6 +4,7 @@ import PokeStats from '../../components/PokeStats'
 import { connect } from 'react-redux'
 import './PokeInfo.css'
 
+
 const PokeInfo = ({ data, stats, infoRequested }) => {
     return (
         <div className='info'>
@@ -28,7 +29,8 @@ const mapStateToProps = ({ pokeInfo }) => {
         stats: {
             stats
         },
-        infoRequested
+        infoRequested,
+
     }
 }
 

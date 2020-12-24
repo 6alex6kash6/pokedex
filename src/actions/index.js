@@ -1,7 +1,15 @@
-import { POKE_REQUEST, API_BASE, POKE_INFO_REQUEST } from "../constants";
+import {
+  POKE_REQUEST,
+  API_BASE,
+  POKE_INFO_REQUEST,
+  POKE_REQUEST_LOADING,
+} from "../constants";
 
-const fetchData = async (url) => {
+const fetchData = async (url, dispatch) => {
   const res = await fetch(url);
+  if (res.ok) {
+    dispatch(loadingState(false));
+  }
   return res.json();
 };
 
@@ -41,8 +49,14 @@ const loadPokemons = (list) => ({
   list: list.map((item) => item),
 });
 
-export const fetchPokemons = () => async (dispatch) => {
-  const list = await fetchData(API_BASE);
+const loadingState = (bool) => ({
+  type: POKE_REQUEST_LOADING,
+  loading: bool,
+});
+
+export const fetchPokemons = (offset) => async (dispatch) => {
+  dispatch(loadingState(true));
+  const list = await fetchData(`${API_BASE}${offset}`, dispatch);
   dispatch(loadPokemons(list.results));
 };
 
@@ -53,7 +67,7 @@ const loadPokemonInfo = (info) => ({
 });
 
 export const fetchPokemonInfo = (url) => async (dispatch) => {
-  const info = await fetchData(url);
+  const info = await fetchData(url, dispatch);
   const normalizedInfo = normalizeInfo(info);
   dispatch(loadPokemonInfo(normalizedInfo));
 };

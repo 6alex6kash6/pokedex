@@ -1,17 +1,31 @@
 import React, { useEffect } from 'react';
+import ReactDOM from 'react-dom'
 import './List.css';
 import ListItem from '../../components/ListItem'
 import { connect } from 'react-redux'
 import { fetchPokemons, fetchPokemonInfo } from '../../actions'
+import Loader from '../../components/Loader'
 
-
-const PokeList = ({ list, requestPokemons, requestPokemonInfo }) => {
+const PokeList = ({ list, loading, requestPokemons, requestPokemonInfo }) => {
     useEffect(() => {
-        requestPokemons()
-    }, [requestPokemons])
+        requestPokemons(list.length)
+    }, [])
+
+    const handleScroll = (e) => {
+        const target = e.target;
+        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
+            requestPokemons(list.length)
+        }
+    }
 
     return (
-        <div className='poke-list'>
+        <div className='poke-list' onScroll={(event) => handleScroll(event)}>
+            {loading && (
+                ReactDOM.createPortal(<div className='load-wrapper'>
+                    <Loader />
+                </div>, document.querySelector('.App'))
+            )
+            }
             <ul className='list-group'>
                 {
                     list.map(item => {
@@ -25,15 +39,16 @@ const PokeList = ({ list, requestPokemons, requestPokemonInfo }) => {
     )
 }
 const mapStateToProps = ({ pokeList }) => {
-    const { list } = pokeList
+    const { list, loading } = pokeList
     return {
         list,
+        loading
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        requestPokemons: () => dispatch(fetchPokemons()),
+        requestPokemons: (offset) => dispatch(fetchPokemons(offset)),
         requestPokemonInfo: (url) => dispatch(fetchPokemonInfo(url))
     }
 }
