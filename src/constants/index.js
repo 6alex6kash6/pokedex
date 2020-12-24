@@ -3,4 +3,4 @@ export const POKE_REQUEST = "POKE_REQUEST";
 export const POKE_REQUEST_LOADING = "POKE_REQUEST_START";
 export const POKE_INFO_REQUEST = "POKE_INFO_REQUEST";
 export const POKE_TYPES = ["Electric", "Grass", "Poison", "Fire"];
-// export const FIND_POKE_NAME =
+export const FIND_POKE_NAME = "FIND_POKE_NAME";

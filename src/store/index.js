@@ -2,6 +2,7 @@ import {
   POKE_REQUEST,
   POKE_INFO_REQUEST,
   POKE_REQUEST_LOADING,
+  FIND_POKE_NAME,
 } from "../constants";
 import { combineReducers } from "redux";
 
@@ -17,6 +18,17 @@ const pokeList = (state = { list: [], loading: false }, action) => {
         ...state,
         loading: action.loading,
       };
+    case FIND_POKE_NAME:
+      let newState = Object.assign({}, state);
+      const { text } = action;
+      if (text) {
+        newState.filteredList = [
+          ...state.list.filter((item) => item.name.includes(action.text)),
+        ];
+      } else {
+        newState.filteredList = newState.list;
+      }
+      return newState;
     default:
       return { ...state };
   }

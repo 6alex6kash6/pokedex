@@ -3,6 +3,7 @@ import {
   API_BASE,
   POKE_INFO_REQUEST,
   POKE_REQUEST_LOADING,
+  FIND_POKE_NAME,
 } from "../constants";
 
 const fetchData = async (url, dispatch) => {
@@ -56,8 +57,10 @@ const loadingState = (bool) => ({
 
 export const fetchPokemons = (offset) => async (dispatch) => {
   dispatch(loadingState(true));
-  const list = await fetchData(`${API_BASE}${offset}`, dispatch);
-  dispatch(loadPokemons(list.results));
+  setTimeout(async () => {
+    const list = await fetchData(`${API_BASE}${offset}`, dispatch);
+    dispatch(loadPokemons(list.results));
+  }, 300);
 };
 
 const loadPokemonInfo = (info) => ({
@@ -71,3 +74,8 @@ export const fetchPokemonInfo = (url) => async (dispatch) => {
   const normalizedInfo = normalizeInfo(info);
   dispatch(loadPokemonInfo(normalizedInfo));
 };
+
+export const findPokeByName = (text) => ({
+  type: FIND_POKE_NAME,
+  text,
+});
