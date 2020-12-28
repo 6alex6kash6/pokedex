@@ -19,7 +19,7 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
     }
 
     return (
-        <div className='poke-list' onScroll={(event) => handleScroll(event)}>
+        <div className='poke-list' >
             {loading && (
                 ReactDOM.createPortal(<div className='load-wrapper'>
                     <Loader />
@@ -32,7 +32,9 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
                         return <ListItem item={item} key={item.name} onShowInfo={requestPokemonInfo} />
                     })
                 }
-
+                <li className='list-group-item poke-item'>
+                    <button onClick={() => requestPokemons(list.length)} className="btn btn-info">Load More Pokemons</button>
+                </li>
             </ul>
         </div>
 

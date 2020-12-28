@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import './Header.css'
-import { findPokeByName } from '../../actions'
+import { findPokeByName, filterPokeByType } from '../../actions'
 import { connect } from 'react-redux'
+import { POKE_TYPES as pokeTypes } from '../../constants'
 
-const Header = ({ findPokeByName }) => {
+const Header = ({ findPokeByName, filterPokeByType }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const handleChange = (e) => {
@@ -22,9 +23,16 @@ const Header = ({ findPokeByName }) => {
                     Filter by Pokemon type
                 </button>
                 <ul className={"dropdown-menu dropdown-menu-end dropdown-menu-lg-start" + (showDropdown ? ' show' : '')}>
-                    <li><button className="dropdown-item" type="button">Electric</button></li>
-                    <li><button className="dropdown-item" type="button">Another action</button></li>
-                    <li><button className="dropdown-item" type="button">Something else here</button></li>
+                    <li onClick={() => filterPokeByType('all')}><button className="dropdown-item" type="button" >Show all</button></li>
+                    {
+                        pokeTypes.map((item) => {
+                            return (
+
+                                <li key={item} onClick={() => filterPokeByType(item)}><button className="dropdown-item" type="button" >{item}</button></li>
+                            )
+                        })
+                    }
+
                 </ul>
             </div>
         </div>
@@ -32,7 +40,8 @@ const Header = ({ findPokeByName }) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    findPokeByName: (text) => dispatch(findPokeByName(text))
+    findPokeByName: (text) => dispatch(findPokeByName(text)),
+    filterPokeByType: (pokeType) => dispatch(filterPokeByType(pokeType))
 })
 
 export default connect(null, mapDispatchToProps)(Header)

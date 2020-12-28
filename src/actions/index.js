@@ -4,14 +4,30 @@ import {
   POKE_INFO_REQUEST,
   POKE_REQUEST_LOADING,
   FIND_POKE_NAME,
+  FIND_POKE_TYPE,
 } from "../constants";
 
 const fetchData = async (url, dispatch) => {
   const res = await fetch(url);
+  const json = await res.json();
   if (res.ok) {
     dispatch(loadingState(false));
   }
-  return res.json();
+  return json;
+};
+
+const mutateList = async (list) => {
+  const pokes = await Promise.all(
+    list.map(async (item) => {
+      const res = await fetch(item.url);
+      const json = await res.json();
+      return json.types.map((item) => item.type.name);
+    })
+  );
+  return list.map((item, i) => ({
+    ...item,
+    type: pokes[i],
+  }));
 };
 
 const defineStatPower = (statValue) => {
@@ -59,7 +75,8 @@ export const fetchPokemons = (offset) => async (dispatch) => {
   dispatch(loadingState(true));
   setTimeout(async () => {
     const list = await fetchData(`${API_BASE}${offset}`, dispatch);
-    dispatch(loadPokemons(list.results));
+    const mutatedList = await mutateList(list.results);
+    dispatch(loadPokemons(mutatedList));
   }, 300);
 };
 
@@ -78,4 +95,9 @@ export const fetchPokemonInfo = (url) => async (dispatch) => {
 export const findPokeByName = (text) => ({
   type: FIND_POKE_NAME,
   text,
+});
+
+export const filterPokeByType = (pokeType) => ({
+  type: FIND_POKE_TYPE,
+  pokeType,
 });

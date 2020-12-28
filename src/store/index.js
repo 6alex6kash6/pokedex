@@ -3,6 +3,7 @@ import {
   POKE_INFO_REQUEST,
   POKE_REQUEST_LOADING,
   FIND_POKE_NAME,
+  FIND_POKE_TYPE,
 } from "../constants";
 import { combineReducers } from "redux";
 
@@ -13,6 +14,7 @@ const pokeList = (state = { list: [], loading: false }, action) => {
       return {
         ...state,
         list: [...state.list.concat(action.list)],
+        pokeType: action.pokeTypes,
       };
     case POKE_REQUEST_LOADING:
       return {
@@ -23,10 +25,20 @@ const pokeList = (state = { list: [], loading: false }, action) => {
       const { text } = action;
       if (text) {
         newState.filteredList = [
-          ...state.list.filter((item) => item.name.includes(action.text)),
+          ...state.list.filter((item) => item.name.includes(text)),
         ];
       } else {
         newState.filteredList = newState.list;
+      }
+      return newState;
+    case FIND_POKE_TYPE:
+      const pokeType = action.pokeType.toLowerCase();
+      if (pokeType === "all") {
+        newState.filteredList = newState.list;
+      } else {
+        newState.filteredList = [
+          ...state.list.filter((item) => item.type.includes(pokeType)),
+        ];
       }
       return newState;
     default:
