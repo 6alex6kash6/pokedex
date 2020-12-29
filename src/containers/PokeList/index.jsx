@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { fetchPokemons, fetchPokemonInfo } from '../../actions'
 import Loader from '../../components/Loader'
 
-const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemonInfo }) => {
+const PokeList = ({ list, filteredList, loading, isFilterApply, requestPokemons, requestPokemonInfo }) => {
     useEffect(() => {
         requestPokemons(list.length)
     }, [])
@@ -25,20 +25,21 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
                         return <ListItem item={item} key={item.name} onShowInfo={requestPokemonInfo} />
                     })
                 }
-                <li className='list-group-item poke-item'>
+                {!isFilterApply && <li className='list-group-item poke-item'>
                     <button onClick={(e) => requestPokemons((filteredList || list).length)} className="btn btn-info">Load More Pokemons</button>
-                </li>
+                </li>}
             </ul>
         </div>
 
     )
 }
 const mapStateToProps = ({ pokeList }) => {
-    const { filteredList, loading, list } = pokeList
+    const { filteredList, loading, list, isFilterApply } = pokeList
     return {
         filteredList,
         loading,
-        list
+        list,
+        isFilterApply
     }
 }
 

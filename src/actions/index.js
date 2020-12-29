@@ -95,9 +95,11 @@ export const fetchPokemonInfo = (url) => async (dispatch) => {
 export const findPokeByName = (text) => ({
   type: FIND_POKE_NAME,
   text,
+  isFilterApply: true,
 });
 
 export const filterPokeByType = (pokeType) => ({
   type: FIND_POKE_TYPE,
   pokeType,
+  isFilterApply: true,
 });

@@ -7,7 +7,10 @@ import {
 } from "../constants";
 import { combineReducers } from "redux";
 
-const pokeList = (state = { list: [], loading: false }, action) => {
+const pokeList = (
+  state = { list: [], loading: false, isFilterApply: false },
+  action
+) => {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case POKE_REQUEST:
@@ -22,20 +25,25 @@ const pokeList = (state = { list: [], loading: false }, action) => {
         loading: action.loading,
       };
     case FIND_POKE_NAME:
-      const { text } = action;
+      const { text, isFilterApply } = action;
       if (text) {
+        newState.isFilterApply = isFilterApply;
         newState.filteredList = [
           ...state.list.filter((item) => item.name.includes(text)),
         ];
       } else {
         newState.filteredList = newState.list;
+        newState.isFilterApply = false;
       }
       return newState;
+
     case FIND_POKE_TYPE:
       const pokeType = action.pokeType.toLowerCase();
       if (pokeType === "all") {
+        newState.isFilterApply = false;
         newState.filteredList = newState.list;
       } else {
+        newState.isFilterApply = action.isFilterApply;
         newState.filteredList = [
           ...state.list.filter((item) => item.type.includes(pokeType)),
         ];
