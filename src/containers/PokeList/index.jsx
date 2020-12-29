@@ -11,13 +11,6 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
         requestPokemons(list.length)
     }, [])
 
-    const handleScroll = (e) => {
-        const target = e.target;
-        if (target.scrollHeight - target.scrollTop === target.clientHeight) {
-            requestPokemons(list.length)
-        }
-    }
-
     return (
         <div className='poke-list' >
             {loading && (
@@ -33,7 +26,7 @@ const PokeList = ({ list, filteredList, loading, requestPokemons, requestPokemon
                     })
                 }
                 <li className='list-group-item poke-item'>
-                    <button onClick={() => requestPokemons(list.length)} className="btn btn-info">Load More Pokemons</button>
+                    <button onClick={(e) => requestPokemons((filteredList || list).length)} className="btn btn-info">Load More Pokemons</button>
                 </li>
             </ul>
         </div>

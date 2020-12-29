@@ -14,7 +14,7 @@ const pokeList = (state = { list: [], loading: false }, action) => {
       return {
         ...state,
         list: [...state.list.concat(action.list)],
-        pokeType: action.pokeTypes,
+        filteredList: [...state.list.concat(action.list)],
       };
     case POKE_REQUEST_LOADING:
       return {
